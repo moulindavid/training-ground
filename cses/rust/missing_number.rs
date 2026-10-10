@@ -6,13 +6,8 @@ fn main() {
 
     let mut iter = input.split_whitespace();
     let n: usize = iter.next().unwrap().parse().unwrap();
-    let numbers: Vec<usize> = iter.map(|x| x.parse().unwrap()).collect();
-    let mut sum = 0;
-    let mut expected = 0;
-    for i in 1..n {
-        expected += i;
-        sum += numbers[i - 1];
-    }
-    expected += n;
+    let sum: usize = iter.map(|x| x.parse::<usize>().unwrap()).sum();
+    let expected = n * (n + 1) / 2;
+
     println!("{}", expected - sum);
 }
