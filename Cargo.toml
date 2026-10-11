@@ -1,0 +1,16 @@
+[package]
+name = "playground"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "weird_algorithm"
+path = "cses/rust/weird_algorithm.rs"
+
+[[bin]]
+name = "missing_number"
+path = "cses/rust/missing_number.rs"
+
+[[bin]]
+name = "repetitions"
+path = "cses/rust/repetitions.rs"
