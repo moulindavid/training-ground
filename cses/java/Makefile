@@ -20,11 +20,18 @@ else
 	printf '%s\n' '$(INPUT)' | $(JAVA) -cp $(BUILD_DIR) $(PROBLEM)
 endif
 
-# Expects tests/<problem_snake_case>/sample.in and sample.out
+# Expects tests/<problem_snake_case>/*.in and matching *.out files
 # Usage: make test PROBLEM=WeirdAlgorithm TEST=weird_algorithm
 test: build
-	$(JAVA) -cp $(BUILD_DIR) $(PROBLEM) < tests/$(TEST)/sample.in > $(BUILD_DIR)/$(PROBLEM).out
-	diff -u tests/$(TEST)/sample.out $(BUILD_DIR)/$(PROBLEM).out
+	@for in_file in tests/$(TEST)/*.in; do \
+		name=$$(basename $$in_file .in); \
+		out_file=tests/$(TEST)/$$name.out; \
+		actual_file=$(BUILD_DIR)/$(PROBLEM)-$$name.out; \
+		echo "Running $$name..."; \
+		$(JAVA) -cp $(BUILD_DIR) $(PROBLEM) < $$in_file > $$actual_file; \
+		diff -u $$out_file $$actual_file || exit 1; \
+	done
+	@echo "All tests passed."
 
 clean:
 	rm -rf $(BUILD_DIR)
