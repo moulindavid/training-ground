@@ -23,10 +23,17 @@ else
 	printf '%s\n' '$(INPUT)' | ./$(BIN)
 endif
 
-# Expects tests/<problem>/sample.in and tests/<problem>/sample.out
+# Expects tests/<problem>/*.in and matching *.out files
 test: build
-	./$(BIN) < tests/$(PROBLEM)/sample.in > $(BUILD_DIR)/$(PROBLEM).out
-	diff -u tests/$(PROBLEM)/sample.out $(BUILD_DIR)/$(PROBLEM).out
+	@for in_file in tests/$(PROBLEM)/*.in; do \
+		name=$$(basename "$$in_file" .in); \
+		out_file="tests/$(PROBLEM)/$$name.out"; \
+		actual_file="$(BUILD_DIR)/$(PROBLEM)-$$name.out"; \
+		echo "Running $$name..."; \
+		./$(BIN) < "$$in_file" > "$$actual_file"; \
+		diff -u "$$out_file" "$$actual_file" || exit 1; \
+	done
+	@echo "All tests passed."
 
 clean:
 	rm -rf $(BUILD_DIR)

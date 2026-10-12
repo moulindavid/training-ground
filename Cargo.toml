@@ -14,3 +14,7 @@ path = "cses/rust/missing_number.rs"
 [[bin]]
 name = "repetitions"
 path = "cses/rust/repetitions.rs"
+
+[[bin]]
+name = "increasing_array"
+path = "cses/rust/increasing_array.rs"

@@ -24,12 +24,12 @@ endif
 # Usage: make test PROBLEM=WeirdAlgorithm TEST=weird_algorithm
 test: build
 	@for in_file in tests/$(TEST)/*.in; do \
-		name=$$(basename $$in_file .in); \
-		out_file=tests/$(TEST)/$$name.out; \
-		actual_file=$(BUILD_DIR)/$(PROBLEM)-$$name.out; \
+		name=$$(basename "$$in_file" .in); \
+		out_file="tests/$(TEST)/$$name.out"; \
+		actual_file="$(BUILD_DIR)/$(PROBLEM)-$$name.out"; \
 		echo "Running $$name..."; \
-		$(JAVA) -cp $(BUILD_DIR) $(PROBLEM) < $$in_file > $$actual_file; \
-		diff -u $$out_file $$actual_file || exit 1; \
+		$(JAVA) -cp $(BUILD_DIR) $(PROBLEM) < "$$in_file" > "$$actual_file"; \
+		diff -u "$$out_file" "$$actual_file" || exit 1; \
 	done
 	@echo "All tests passed."
 
