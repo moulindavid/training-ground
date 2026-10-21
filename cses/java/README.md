@@ -21,3 +21,8 @@ make test PROBLEM=WeirdAlgorithm TEST=weird_algorithm
 ```
 
 For CSES submissions, you can rename the class/file to `Main` if needed.
+
+## Permutations (CSES 1070)
+
+After creating `Permutations.java`, run `make test PROBLEM=Permutations TEST=permutations`.
+These tests compare exact `.out` files. Since multiple beautiful permutations are valid, a valid answer may differ; adjust the expected `.out` files to match your chosen construction.

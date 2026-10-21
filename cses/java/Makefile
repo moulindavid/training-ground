@@ -28,7 +28,7 @@ test: build
 		out_file="tests/$(TEST)/$$name.out"; \
 		actual_file="$(BUILD_DIR)/$(PROBLEM)-$$name.out"; \
 		echo "Running $$name..."; \
-		$(JAVA) -cp $(BUILD_DIR) $(PROBLEM) < "$$in_file" > "$$actual_file"; \
+		$(JAVA) -cp $(BUILD_DIR) $(PROBLEM) < "$$in_file" > "$$actual_file" || exit 1; \
 		diff -u "$$out_file" "$$actual_file" || exit 1; \
 	done
 	@echo "All tests passed."
